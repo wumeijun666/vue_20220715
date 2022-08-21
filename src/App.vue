@@ -22,9 +22,6 @@ export default {
 	data() {
 		return {
 			todos: [
-				{ id: '001', title: '吃饭', status: true },
-				{ id: '002', title: '抽抽烟', status: false },
-				{ id: '003', title: '喝酒', status: true },
 			]
 		}
 	},
@@ -55,6 +52,12 @@ export default {
 			this.todos = this.todos.filter((todo)=>{
 				return !todo.status
 			})
+		}
+	},
+	watch:{
+		todos(value){
+			console.log("监听todos发生变化没");
+			localStorage.setItem("todos",value)	
 		}
 	}
 } 

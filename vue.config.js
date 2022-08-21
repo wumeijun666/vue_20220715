@@ -5,5 +5,5 @@ module.exports = {
         entry: 'src/peiqi.js'
       },
   },
-  lintOnSave:true//关闭语法检查
+  lintOnSave:true//false 关闭语法检查 true开启
 }
