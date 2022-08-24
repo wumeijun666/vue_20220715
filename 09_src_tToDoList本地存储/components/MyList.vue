@@ -1,6 +1,7 @@
 <template>
 	<ul class="todo-main">
-		<Item v-for="todo of todos" :key="todo.id" :todoObj="todo" :checkToDo="checkToDo" :deleteTodo="deleteTodo"></Item>
+		<Item v-for="todo of todos" :key="todo.id" :todoObj="todo" :checkToDo="checkToDo" :deleteTodo="deleteTodo">
+		</Item>
 	</ul>
 </template>
 
@@ -28,6 +29,14 @@ export default {
 		deleteTodo: {
 			type: Function,
 			required: true
+		}
+	},
+	watch: {
+		checkToDo: {
+			handler(newObj) {
+				console.log('我是Mylist触发了checkTodo函数', newObj)
+			},
+			deep: true
 		}
 	}
 }

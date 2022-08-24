@@ -22,12 +22,13 @@ export default {
 	methods: {
 		// 勾选改变状态
 		changeStatus(id) {
+			console.log('改变状态。。。，在这里触发函数，会引起父组件函数被触发')
 			this.checkToDo(id)
 		},
 		//删除
 		handleDelete(id) {
-			let a = confirm('是否删除'+id);
-			if(a){
+			let a = confirm('是否删除' + id);
+			if (a) {
 				this.deleteTodo(id)
 			}
 		}
@@ -35,9 +36,15 @@ export default {
 	watch: {
 		todoObj: {
 			handler(newObj) {
-				console.log("newObj",newObj)
+				console.log("newObj", newObj)
 			},
-			deep:true
+			deep: true
+		},
+		checkToDo: {
+			handler(newObj) {
+				console.log('我是Item触发checkToDo函数了', newObj)
+			},
+			deep: true
 		}
 	},
 	props: {

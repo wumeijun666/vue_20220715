@@ -21,8 +21,7 @@ export default {
 	components: { MyFooter, MyHeader, MyList },
 	data() {
 		return {
-			todos: [
-			]
+			todos: JSON.parse(localStorage.getItem('todos')) ? JSON.parse(localStorage.getItem('todos')) : []
 		}
 	},
 	methods: {
@@ -33,12 +32,13 @@ export default {
 		},
 		//取消或勾选一个todo
 		checkToDo(id) {
-			console.log("id=", id)
+			console.log("父组件checkToDo触发id=", id)
 			this.todos.forEach(obj => {
 				if (obj.id === id) {
 					obj.status = !obj.status
 				}
 			})
+			// localStorage.setItem("todos", JSON.stringify(this.todos))
 		},
 		//删除一个
 		deleteTodo(id) {
@@ -47,17 +47,21 @@ export default {
 			});
 		},
 		// 清除所有已经完成的todo
-		clearAllTodo(){
+		clearAllTodo() {
 			// 所有状态为真的清除掉
-			this.todos = this.todos.filter((todo)=>{
+			this.todos = this.todos.filter((todo) => {
 				return !todo.status
 			})
 		}
 	},
-	watch:{
-		todos(value){
-			console.log("监听todos发生变化没");
-			localStorage.setItem("todos",value)	
+	watch: {
+		//开启深度监视，里面属性改变也可触发存储
+		todos: {
+			handler(value) {
+				console.log("监听todos发生变化没");
+				localStorage.setItem("todos", JSON.stringify(value))
+			},
+			deep: true
 		}
 	}
 } 
